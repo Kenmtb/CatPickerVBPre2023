@@ -57,6 +57,7 @@ Public Class frmShowCats
 
 
     bs = New BindingSource()
+    bs.Filter = "gender ='Male'"
     bs.DataSource = catList
     dgvShowCats.DataSource = catList
 
@@ -98,15 +99,13 @@ Public Class frmShowCats
 
     'Hide
     dgvShowCats.Columns("Id").Visible = False
-    dgvShowCats.Columns("breedId").Visible = False
+    'dgvShowCats.Columns("breedId").Visible = False
     dgvShowCats.Columns("detailsId").Visible = False
     dgvShowCats.Columns("pic").Visible = False
     'dgvShowCats.Columns("selected").Visible = False
 
     'ADD images to columns
     For Each row As DataGridViewRow In dgvShowCats.Rows
-
-      'dirImg = imageDir + row.Cells("pic").Value.ToString()
 
       'get the stored image
       img = Image.FromFile(imageDir + row.Cells("pic").Value.ToString())
@@ -118,11 +117,14 @@ Public Class frmShowCats
     'Initialize data
     dlgPictures.InitialDirectory = imageDir
     radEdit.Checked = True
-    cmbBreed.DataSource = vm.catBreedList
+    cmbBreed.DataSource = vm.catBreedList.ToList() 'converting to list seems to break the implicit binding of the control's datasource which itself is bound to a dgv
     cmbBreed.DisplayMember = "breedName"
     cmbBreed.ValueMember = "Id"
 
-    'cmbBreed.SelectedItem = "breedName"
+    cmbSearchBreed.DataSource = vm.catBreedList
+    cmbSearchBreed.DisplayMember = "breedName"
+    cmbSearchBreed.ValueMember = "Id"
+
 
 
 bypass:
@@ -252,6 +254,35 @@ bypass:
       pnlSearch.Visible = True
       pnlEdit.Visible = False
     End If
+
+  End Sub
+
+  Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Dim paramList As List(Of SQLParam) = buildParameterList()
+    initForm(bll.getFromSearch(paramList))
+  End Sub
+
+  Private Function buildParameterList() As List(Of SQLParam)
+    'Build sql search parameter list from search controls.
+    'paramName used in search but not needed for filtering
+    'paramOperator not used
+    Dim paramList As New List(Of SQLParam)
+    paramList.Add(New SQLParam With {.paramName = "gender", .parameterOperator = "=", .paramValue = cmbSearchGender.Text})
+    paramList.Add(New SQLParam With {.paramName = "breed", .parameterOperator = "=", .paramValue = cmbSearchBreed.SelectedValue})
+    paramList.Add(New SQLParam With {.paramName = "age", .parameterOperator = "<=", .paramValue = txtSearchAge.Text})
+    Return paramList
+  End Function
+
+  Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+    'Store the orig vm
+    Dim origList As New List(Of Cat)
+    origList = vm.catList
+
+    Dim paramList As List(Of SQLParam) = buildParameterList()
+    initForm(bll.getFromFilter(vm, paramList))
+
+    'restore the original vm
+    vm.catList = origList
 
   End Sub
 End Class

@@ -4,7 +4,7 @@
 
   'foreign fields
   Public Property breedName As String
-  Public Property breedid As Integer
+  Public Property Id As Integer
 
   'drop downs and foriegn key lookup lists
   Public Property catBreedList As List(Of CatBreed)

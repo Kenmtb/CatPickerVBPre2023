@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 Imports System.Collections.Generic
 Imports System.Configuration
 Imports Globals
+Imports Globals.Defs
 
 Public Class ODBCRep(Of T)
 
@@ -54,13 +55,62 @@ Public Class ODBCRep(Of T)
       com.CommandText = sqlStr
     End If
 
+    'Temp add params by hand to test, remove when done
+
     If paramList IsNot Nothing Then
+
+      '  Dim PmtrAge As New SqlParameter
+      '  PmtrAge.ParameterName = "@age"
+      '  PmtrAge.SqlDbType = SqlDbType.VarChar
+      '  PmtrAge.Direction = ParameterDirection.Input
+
+      '  Dim PmtrGender As New SqlParameter
+      '  PmtrGender.ParameterName = "@gender"
+      '  PmtrGender.SqlDbType = SqlDbType.VarChar
+      '  PmtrGender.Direction = ParameterDirection.Input
+
+      '  com.Parameters.Add(PmtrAge)
+      '  com.Parameters.Add(PmtrGender)
+
+
+      '  PmtrAge.Value = 3
+      '  PmtrGender.Value = "%"
+
+
       For Each param As SqlParameter In paramList
         com.Parameters.Add(param)
       Next
+
+      com.CommandText = com.CommandText + " Where age <= @age and breedId = @breed and gender = @gender "
     End If
 
+    'If paramList IsNot Nothing Then
+    '  For Each param As SqlParameter In paramList
+    '    com.Parameters.Add(param)
+    '  Next
+    'End If
+
     Return com
+  End Function
+  '*********************************************** CRUD helpers
+  Public Function paramBuilder(stringParamList As List(Of SQLParam)) As List(Of SqlParameter)
+    'Input: list of sql parameters objects (name of parameter, parameter value)
+    'Output: input list converted to a list of SqlParameter
+
+    Dim paramList As New List(Of SqlParameter)
+    Dim param As SqlParameter
+
+    If stringParamList.Count > 0 Then
+      For Each stringParam As SQLParam In stringParamList
+        param = New SqlParameter()
+        param.ParameterName = "@" + stringParam.paramName
+        param.Value = stringParam.paramValue
+        param.SqlDbType = SqlDbType.VarChar
+        param.Direction = ParameterDirection.Input
+        paramList.Add(param)
+      Next
+    End If
+    Return paramList
   End Function
 
   Public Function getCommandString(Optional ByVal sqlStr As String = Nothing, Optional ByRef paramList As List(Of SqlParameter) = Nothing)
@@ -83,7 +133,7 @@ Public Class ODBCRep(Of T)
 
     Return returnValue
   End Function
-  '*********************************************** CRUD helpers
+
   Public Function getDataObject(Optional ByVal sqlStr As String = Nothing, Optional ByRef paramList As List(Of SqlParameter) = Nothing)
     Dim dt As New DataTable()
     'Dim cmd As SqlCommand()
@@ -107,14 +157,15 @@ Public Class ODBCRep(Of T)
     Return Nothing
   End Function
 
-
-  Protected Function getRecords() As IEnumerable(Of T)
-    'Protected Function getRecords(Optional ByVal sqlStr As String = Nothing, Optional ByRef paramList As List(Of SqlParameter) = Nothing) As IEnumerable(Of T)
+  Protected Function getRecords(strParamList As List(Of SQLParam)) As IEnumerable(Of T)
+    Return getRecords("", paramBuilder(strParamList))
+  End Function
+  Protected Function getRecords(Optional ByVal sqlStr As String = Nothing, Optional ByRef paramList As List(Of SqlParameter) = Nothing) As IEnumerable(Of T)
 
     Dim list = New List(Of T)()
     Dim reader As DataTable = Nothing
 
-    reader = getDataObject()
+    reader = getDataObject("", paramList)
 
     Try
       If reader.Rows.Count > 0 Then

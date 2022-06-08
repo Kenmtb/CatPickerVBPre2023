@@ -1,4 +1,5 @@
 ﻿Imports Models
+Imports Globals.Defs
 
 Public Class CatVMRepository
 
@@ -19,6 +20,13 @@ Public Class CatVMRepository
   Public Function getAll() As CatVM
     vm = New CatVM()
     vm.catList = (New CatRepository(Of Cat)).getAll().ToList()
+    vm.catBreedList = (New CatBreedRepository(Of CatBreed)).getAll.ToList()
+    Return vm
+  End Function
+
+  Public Function getFromSearch(paramList As List(Of SQLParam))
+    vm = New CatVM()
+    vm.catList = (New CatRepository(Of Cat)).getFromSearch(paramList)
     vm.catBreedList = (New CatBreedRepository(Of CatBreed)).getAll.ToList()
     Return vm
   End Function

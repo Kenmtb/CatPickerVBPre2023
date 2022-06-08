@@ -1,5 +1,6 @@
 ﻿Imports Models
 Imports Globals
+Imports Globals.Defs
 
 Public Class CatRepository(Of T)
   Inherits ODBCRep(Of Cat)
@@ -36,6 +37,9 @@ Public Class CatRepository(Of T)
     Return testList
   End Function
 
+  Public Function getFromSearch(paramList As List(Of SQLParam))
+    Return getRecords(paramList)
+  End Function
 
   Public Function getAll() As IEnumerable(Of Cat) Implements ICatRepository(Of Cat).getAll
     Return getRecords()

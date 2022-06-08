@@ -39,23 +39,24 @@ Partial Class frmShowCats
         Me.btnSave = New System.Windows.Forms.Button()
         Me.dlgPictures = New System.Windows.Forms.OpenFileDialog()
         Me.pnlEdit = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cmbBreed = New System.Windows.Forms.ComboBox()
+        Me.cmbGender = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.cmbSearchBreed = New System.Windows.Forms.ComboBox()
+        Me.cmbSearchGender = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtSearchAge = New System.Windows.Forms.TextBox()
         Me.radEdit = New System.Windows.Forms.RadioButton()
         Me.grpMenu = New System.Windows.Forms.GroupBox()
         Me.radSearch = New System.Windows.Forms.RadioButton()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.cmbGender = New System.Windows.Forms.ComboBox()
-        Me.cmbBreed = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.CatBreedBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.btnFilter = New System.Windows.Forms.Button()
         CType(Me.dgvShowCats, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picCatPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlEdit.SuspendLayout()
@@ -209,20 +210,118 @@ Partial Class frmShowCats
         Me.pnlEdit.Size = New System.Drawing.Size(493, 318)
         Me.pnlEdit.TabIndex = 15
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(256, 120)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(35, 13)
+        Me.Label10.TabIndex = 18
+        Me.Label10.Text = "Breed"
+        '
+        'cmbBreed
+        '
+        Me.cmbBreed.FormattingEnabled = True
+        Me.cmbBreed.Location = New System.Drawing.Point(329, 119)
+        Me.cmbBreed.Name = "cmbBreed"
+        Me.cmbBreed.Size = New System.Drawing.Size(141, 21)
+        Me.cmbBreed.TabIndex = 17
+        '
+        'cmbGender
+        '
+        Me.cmbGender.FormattingEnabled = True
+        Me.cmbGender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.cmbGender.Location = New System.Drawing.Point(329, 146)
+        Me.cmbGender.Name = "cmbGender"
+        Me.cmbGender.Size = New System.Drawing.Size(76, 21)
+        Me.cmbGender.TabIndex = 16
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(210, 20)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(51, 20)
+        Me.Label5.TabIndex = 15
+        Me.Label5.Text = "Editor"
+        '
         'pnlSearch
         '
+        Me.pnlSearch.Controls.Add(Me.btnFilter)
+        Me.pnlSearch.Controls.Add(Me.btnSearch)
         Me.pnlSearch.Controls.Add(Me.Label9)
         Me.pnlSearch.Controls.Add(Me.Label8)
         Me.pnlSearch.Controls.Add(Me.Label7)
-        Me.pnlSearch.Controls.Add(Me.ComboBox3)
-        Me.pnlSearch.Controls.Add(Me.ComboBox2)
-        Me.pnlSearch.Controls.Add(Me.ComboBox1)
+        Me.pnlSearch.Controls.Add(Me.cmbSearchBreed)
+        Me.pnlSearch.Controls.Add(Me.cmbSearchGender)
         Me.pnlSearch.Controls.Add(Me.Label6)
-        Me.pnlSearch.Controls.Add(Me.TextBox1)
+        Me.pnlSearch.Controls.Add(Me.txtSearchAge)
         Me.pnlSearch.Location = New System.Drawing.Point(635, 511)
         Me.pnlSearch.Name = "pnlSearch"
         Me.pnlSearch.Size = New System.Drawing.Size(493, 318)
         Me.pnlSearch.TabIndex = 16
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(288, 62)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(26, 13)
+        Me.Label9.TabIndex = 22
+        Me.Label9.Text = "Age"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(151, 65)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(35, 13)
+        Me.Label8.TabIndex = 21
+        Me.Label8.Text = "Breed"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(11, 62)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(42, 13)
+        Me.Label7.TabIndex = 20
+        Me.Label7.Text = "Gender"
+        '
+        'cmbSearchBreed
+        '
+        Me.cmbSearchBreed.FormattingEnabled = True
+        Me.cmbSearchBreed.Location = New System.Drawing.Point(154, 83)
+        Me.cmbSearchBreed.Name = "cmbSearchBreed"
+        Me.cmbSearchBreed.Size = New System.Drawing.Size(121, 21)
+        Me.cmbSearchBreed.TabIndex = 18
+        '
+        'cmbSearchGender
+        '
+        Me.cmbSearchGender.FormattingEnabled = True
+        Me.cmbSearchGender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.cmbSearchGender.Location = New System.Drawing.Point(14, 83)
+        Me.cmbSearchGender.Name = "cmbSearchGender"
+        Me.cmbSearchGender.Size = New System.Drawing.Size(121, 21)
+        Me.cmbSearchGender.TabIndex = 17
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(213, 20)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(60, 20)
+        Me.Label6.TabIndex = 16
+        Me.Label6.Text = "Search"
+        '
+        'txtSearchAge
+        '
+        Me.txtSearchAge.Location = New System.Drawing.Point(291, 84)
+        Me.txtSearchAge.Name = "txtSearchAge"
+        Me.txtSearchAge.Size = New System.Drawing.Size(100, 20)
+        Me.txtSearchAge.TabIndex = 0
         '
         'radEdit
         '
@@ -257,113 +356,27 @@ Partial Class frmShowCats
         Me.radSearch.Text = "Search"
         Me.radSearch.UseVisualStyleBackColor = True
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(29, 164)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 0
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(210, 20)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(51, 20)
-        Me.Label5.TabIndex = 15
-        Me.Label5.Text = "Editor"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(213, 20)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(60, 20)
-        Me.Label6.TabIndex = 16
-        Me.Label6.Text = "Search"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(14, 83)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 17
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(154, 83)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 18
-        '
-        'ComboBox3
-        '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(291, 83)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox3.TabIndex = 19
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(11, 62)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(42, 13)
-        Me.Label7.TabIndex = 20
-        Me.Label7.Text = "Gender"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(151, 65)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(35, 13)
-        Me.Label8.TabIndex = 21
-        Me.Label8.Text = "Breed"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(288, 62)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(26, 13)
-        Me.Label9.TabIndex = 22
-        Me.Label9.Text = "Age"
-        '
-        'cmbGender
-        '
-        Me.cmbGender.FormattingEnabled = True
-        Me.cmbGender.Items.AddRange(New Object() {"Male", "Female"})
-        Me.cmbGender.Location = New System.Drawing.Point(329, 146)
-        Me.cmbGender.Name = "cmbGender"
-        Me.cmbGender.Size = New System.Drawing.Size(76, 21)
-        Me.cmbGender.TabIndex = 16
-        '
-        'cmbBreed
-        '
-        Me.cmbBreed.FormattingEnabled = True
-        Me.cmbBreed.Location = New System.Drawing.Point(296, 117)
-        Me.cmbBreed.Name = "cmbBreed"
-        Me.cmbBreed.Size = New System.Drawing.Size(194, 21)
-        Me.cmbBreed.TabIndex = 17
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(256, 120)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(35, 13)
-        Me.Label10.TabIndex = 18
-        Me.Label10.Text = "Breed"
-        '
         'CatBreedBindingSource
         '
         Me.CatBreedBindingSource.DataSource = GetType(Models.CatBreed)
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(14, 115)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 23
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
+        'btnFilter
+        '
+        Me.btnFilter.Location = New System.Drawing.Point(14, 144)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(75, 23)
+        Me.btnFilter.TabIndex = 24
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
         '
         'frmShowCats
         '
@@ -412,11 +425,10 @@ Partial Class frmShowCats
     Friend WithEvents radEdit As RadioButton
     Friend WithEvents grpMenu As GroupBox
     Friend WithEvents radSearch As RadioButton
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtSearchAge As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbSearchBreed As ComboBox
+    Friend WithEvents cmbSearchGender As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
@@ -425,4 +437,6 @@ Partial Class frmShowCats
     Friend WithEvents Label10 As Label
     Friend WithEvents cmbBreed As ComboBox
     Friend WithEvents CatBreedBindingSource As BindingSource
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnFilter As Button
 End Class

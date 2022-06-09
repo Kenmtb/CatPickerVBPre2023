@@ -117,13 +117,19 @@ Public Class frmShowCats
     'Initialize data
     dlgPictures.InitialDirectory = imageDir
     radEdit.Checked = True
+    'add a wildcard
+    vm.catBreedList.Add(New CatBreed() With {.breedName = wildCardText, .Id = -1})
+    vm.catBreedList = vm.catBreedList.OrderBy((Function(x) x.Id)).ToList()
+    'debind 
     cmbBreed.DataSource = vm.catBreedList.ToList() 'converting to list seems to break the implicit binding of the control's datasource which itself is bound to a dgv
     cmbBreed.DisplayMember = "breedName"
     cmbBreed.ValueMember = "Id"
 
+
     cmbSearchBreed.DataSource = vm.catBreedList
     cmbSearchBreed.DisplayMember = "breedName"
     cmbSearchBreed.ValueMember = "Id"
+    cmbSearchGender.SelectedIndex = 0
 
 
 
@@ -245,14 +251,16 @@ bypass:
   Private Sub radEdit_CheckedChanged(sender As Object, e As EventArgs) Handles radEdit.CheckedChanged
     If radEdit.Checked Then
       pnlSearch.Visible = False
+      'pnlEdit.BringToFront()
       pnlEdit.Visible = True
     End If
   End Sub
 
   Private Sub radSearch_CheckedChanged(sender As Object, e As EventArgs) Handles radSearch.CheckedChanged
     If radSearch.Checked Then
-      pnlSearch.Visible = True
       pnlEdit.Visible = False
+      pnlSearch.Visible = True
+      'pnlSearch.BringToFront()
     End If
 
   End Sub
@@ -268,7 +276,7 @@ bypass:
     'paramOperator not used
     Dim paramList As New List(Of SQLParam)
     paramList.Add(New SQLParam With {.paramName = "gender", .parameterOperator = "=", .paramValue = cmbSearchGender.Text})
-    paramList.Add(New SQLParam With {.paramName = "breed", .parameterOperator = "=", .paramValue = cmbSearchBreed.SelectedValue})
+    paramList.Add(New SQLParam With {.paramName = "breedId", .parameterOperator = "=", .paramValue = cmbSearchBreed.SelectedValue})
     paramList.Add(New SQLParam With {.paramName = "age", .parameterOperator = "<=", .paramValue = txtSearchAge.Text})
     Return paramList
   End Function
@@ -283,6 +291,10 @@ bypass:
 
     'restore the original vm
     vm.catList = origList
+
+  End Sub
+
+  Private Sub grpMenu_Enter(sender As Object, e As EventArgs) Handles grpMenu.Enter
 
   End Sub
 End Class

@@ -1,5 +1,6 @@
 ﻿Public NotInheritable Class Defs
   Public Const imageDir As String = "C:\Users\Ken\source\repos\CatPicker\CatPicker\Images\Cats\"
+  Public Const wildCardText As String = "Any"
 
   Public Class SQLParam
     Public Property paramName As String

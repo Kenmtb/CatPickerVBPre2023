@@ -4,7 +4,7 @@ Imports Globals.Defs
 
 Public Class CatRepository(Of T)
   Inherits ODBCRep(Of Cat)
-  Implements ICatRepository(Of Cat)
+  Implements IRepository(Of Cat)
 
   Dim rec As Cat
 
@@ -13,11 +13,11 @@ Public Class CatRepository(Of T)
     MyBase.createSQLstrings("dbo.cats")
   End Sub
 
-  Public Sub insert(obj As Object) Implements ICatRepository(Of Cat).insert
+  Public Sub insert(obj As Object) Implements IRepository(Of Cat).insert
     Throw New NotImplementedException()
   End Sub
 
-  Public Sub save(obj As Cat) Implements ICatRepository(Of Cat).save
+  Public Sub save(obj As Cat) Implements IRepository(Of Cat).save
     Try
       saveRecords(obj, obj.Id)
     Catch ex As Exception
@@ -41,7 +41,7 @@ Public Class CatRepository(Of T)
     Return getRecords(paramList)
   End Function
 
-  Public Function getAll() As IEnumerable(Of Cat) Implements ICatRepository(Of Cat).getAll
+  Public Function getAll() As IEnumerable(Of Cat) Implements IRepository(Of Cat).getAll
     Return getRecords()
   End Function
 
@@ -82,7 +82,7 @@ Public Class CatRepository(Of T)
 
   End Function
 
-  Public Function getById(id As Object) As Cat Implements ICatRepository(Of Cat).getById
+  Public Function getById(id As Object) As Cat Implements IRepository(Of Cat).getById
     'return (GetRecords("SELECT * FROM dbo.cats WHERE Id = " + id)).FirstOrDefault();
     ' id = -1 means a New record Is requested for the editor, otherwise return a record
 
@@ -96,7 +96,7 @@ Public Class CatRepository(Of T)
     End If
   End Function
 
-  Public Function delete(id As Object) As Object Implements ICatRepository(Of Cat).delete
+  Public Function delete(id As Object) As Object Implements IRepository(Of Cat).delete
     Throw New NotImplementedException()
   End Function
 

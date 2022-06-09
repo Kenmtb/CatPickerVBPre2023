@@ -101,9 +101,10 @@
     </Compile>
     <Compile Include="Repositories\CatBreedRepository.vb" />
     <Compile Include="Repositories\CatDetailRepository.vb" />
+    <Compile Include="Repositories\CatDetailsRepository.vb" />
     <Compile Include="Repositories\CatRepository.vb" />
     <Compile Include="Repositories\CatVMRepository.vb" />
-    <Compile Include="Repositories\ICatRepository.vb" />
+    <Compile Include="Repositories\IRepository.vb" />
     <Compile Include="Repositories\ODBCRep\ODBCRep.vb" />
   </ItemGroup>
   <ItemGroup>

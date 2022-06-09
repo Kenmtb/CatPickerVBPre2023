@@ -20,12 +20,17 @@ Public NotInheritable Class Utilities
 
   Public Shared Sub ClearFormBindings(frm As Form)
     'Clears all form controls binding for one container level drill down.
-    Dim c As Control
+    Dim c, cc, ccc As Control
     For Each c In frm.Controls
       c.DataBindings.Clear()
       If c.HasChildren Then
         For Each cc In c.Controls
           cc.DataBindings.Clear()
+          If cc.HasChildren Then
+            For Each ccc In cc.Controls
+              ccc.DataBindings.Clear()
+            Next ccc
+          End If
         Next cc
       End If
     Next c

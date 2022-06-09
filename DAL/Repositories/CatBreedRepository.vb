@@ -1,7 +1,7 @@
 ﻿Imports Models
 Public Class CatBreedRepository(Of T)
   Inherits ODBCRep(Of CatBreed)
-  Implements ICatRepository(Of CatBreed)
+  Implements IRepository(Of CatBreed)
 
   Private rec As CatBreed
 
@@ -10,19 +10,19 @@ Public Class CatBreedRepository(Of T)
     MyBase.createSQLstrings("dbo.breeds")
   End Sub
 
-  Public Sub insert(obj As Object) Implements ICatRepository(Of CatBreed).insert
+  Public Sub insert(obj As Object) Implements IRepository(Of CatBreed).insert
     Throw New NotImplementedException()
   End Sub
 
-  Public Sub save(obj As CatBreed) Implements ICatRepository(Of CatBreed).save
+  Public Sub save(obj As CatBreed) Implements IRepository(Of CatBreed).save
     Throw New NotImplementedException()
   End Sub
 
-  Public Function getAll() As IEnumerable(Of CatBreed) Implements ICatRepository(Of CatBreed).getAll
+  Public Function getAll() As IEnumerable(Of CatBreed) Implements IRepository(Of CatBreed).getAll
     Return getRecords()
   End Function
 
-  Public Function getById(id As Object) As CatBreed Implements ICatRepository(Of CatBreed).getById
+  Public Function getById(id As Object) As CatBreed Implements IRepository(Of CatBreed).getById
     'return (GetRecords("SELECT * FROM dbo.cats WHERE Id = " + id)).FirstOrDefault();
     ' id = -1 means a New record Is requested for the editor, otherwise return a record
 
@@ -35,7 +35,7 @@ Public Class CatBreedRepository(Of T)
     End If
   End Function
 
-  Public Function delete(id As Object) As Object Implements ICatRepository(Of CatBreed).delete
+  Public Function delete(id As Object) As Object Implements IRepository(Of CatBreed).delete
     Throw New NotImplementedException()
   End Function
 

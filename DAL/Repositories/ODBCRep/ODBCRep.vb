@@ -12,6 +12,7 @@ Public Class ODBCRep(Of T)
   Private baseSQLIdString As String
   Private baseSQLGetLastRecordString As String
   Private baseSQLGetLastRecordIDString As String
+  Private SQLFilterString As String
 
   Public Property conStrName As String
 
@@ -31,6 +32,22 @@ Public Class ODBCRep(Of T)
 
     'SQL for child tables
     baseSQLGetLastRecordString = " SELECT max(id) from " + tablename 'adding child table data
+  End Sub
+
+  Public Sub setSQLFilterString(paramList As List(Of SQLParam))
+    'Builds the where clause of an sql string
+    'Input: Search/filter parameter list as parametername, parameteroperator, @parametername 
+    'Output: SQL where clause string 
+
+    'build the command text from the parameter list
+    Dim str As String = "WHERE "
+    For Each param As SQLParam In paramList
+      If CStr(param.paramValue) <> "-1" And param.paramValue.Length > 0 And param.paramValue <> wildCardText Then str += param.paramName + " " + param.parameterOperator + " @" + param.paramName + " AND "
+    Next
+    str += "0=0 "
+
+    SQLFilterString = str
+
   End Sub
 
 
@@ -57,43 +74,22 @@ Public Class ODBCRep(Of T)
 
     'Temp add params by hand to test, remove when done
 
+
     If paramList IsNot Nothing Then
-
-      '  Dim PmtrAge As New SqlParameter
-      '  PmtrAge.ParameterName = "@age"
-      '  PmtrAge.SqlDbType = SqlDbType.VarChar
-      '  PmtrAge.Direction = ParameterDirection.Input
-
-      '  Dim PmtrGender As New SqlParameter
-      '  PmtrGender.ParameterName = "@gender"
-      '  PmtrGender.SqlDbType = SqlDbType.VarChar
-      '  PmtrGender.Direction = ParameterDirection.Input
-
-      '  com.Parameters.Add(PmtrAge)
-      '  com.Parameters.Add(PmtrGender)
-
-
-      '  PmtrAge.Value = 3
-      '  PmtrGender.Value = "%"
-
 
       For Each param As SqlParameter In paramList
         com.Parameters.Add(param)
       Next
 
-      com.CommandText = com.CommandText + " Where age <= @age and breedId = @breed and gender = @gender "
-    End If
+      com.CommandText = com.CommandText + " " + SQLFilterString
+      'com.CommandText = com.CommandText + " Where age <= @age and breedId = @breed and gender = @gender "
 
-    'If paramList IsNot Nothing Then
-    '  For Each param As SqlParameter In paramList
-    '    com.Parameters.Add(param)
-    '  Next
-    'End If
+    End If
 
     Return com
   End Function
   '*********************************************** CRUD helpers
-  Public Function paramBuilder(stringParamList As List(Of SQLParam)) As List(Of SqlParameter)
+  Public Function buildSQLParameters(stringParamList As List(Of SQLParam)) As List(Of SqlParameter)
     'Input: list of sql parameters objects (name of parameter, parameter value)
     'Output: input list converted to a list of SqlParameter
 
@@ -143,7 +139,7 @@ Public Class ODBCRep(Of T)
       Using sdr As SqlDataReader = cmd.ExecuteReader()
         'Using dt As New DataTable()
         dt.Load(sdr)
-          Return dt
+        Return dt
         'End Using
       End Using
     End Using
@@ -158,7 +154,8 @@ Public Class ODBCRep(Of T)
   End Function
 
   Protected Function getRecords(strParamList As List(Of SQLParam)) As IEnumerable(Of T)
-    Return getRecords("", paramBuilder(strParamList))
+    setSQLFilterString(strParamList)
+    Return getRecords("", buildSQLParameters(strParamList))
   End Function
   Protected Function getRecords(Optional ByVal sqlStr As String = Nothing, Optional ByRef paramList As List(Of SqlParameter) = Nothing) As IEnumerable(Of T)
 

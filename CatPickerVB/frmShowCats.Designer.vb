@@ -44,6 +44,8 @@ Partial Class frmShowCats
         Me.cmbGender = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -55,8 +57,6 @@ Partial Class frmShowCats
         Me.grpMenu = New System.Windows.Forms.GroupBox()
         Me.radSearch = New System.Windows.Forms.RadioButton()
         Me.CatBreedBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.btnFilter = New System.Windows.Forms.Button()
         CType(Me.dgvShowCats, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picCatPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlEdit.SuspendLayout()
@@ -102,7 +102,7 @@ Partial Class frmShowCats
         '
         'btnShowSelected
         '
-        Me.btnShowSelected.Location = New System.Drawing.Point(31, 527)
+        Me.btnShowSelected.Location = New System.Drawing.Point(23, 527)
         Me.btnShowSelected.Name = "btnShowSelected"
         Me.btnShowSelected.Size = New System.Drawing.Size(88, 40)
         Me.btnShowSelected.TabIndex = 4
@@ -205,7 +205,7 @@ Partial Class frmShowCats
         Me.pnlEdit.Controls.Add(Me.Label2)
         Me.pnlEdit.Controls.Add(Me.Label3)
         Me.pnlEdit.Controls.Add(Me.txtArrivalDate)
-        Me.pnlEdit.Location = New System.Drawing.Point(136, 511)
+        Me.pnlEdit.Location = New System.Drawing.Point(141, 511)
         Me.pnlEdit.Name = "pnlEdit"
         Me.pnlEdit.Size = New System.Drawing.Size(493, 318)
         Me.pnlEdit.TabIndex = 15
@@ -257,10 +257,28 @@ Partial Class frmShowCats
         Me.pnlSearch.Controls.Add(Me.cmbSearchGender)
         Me.pnlSearch.Controls.Add(Me.Label6)
         Me.pnlSearch.Controls.Add(Me.txtSearchAge)
-        Me.pnlSearch.Location = New System.Drawing.Point(635, 511)
+        Me.pnlSearch.Location = New System.Drawing.Point(141, 511)
         Me.pnlSearch.Name = "pnlSearch"
         Me.pnlSearch.Size = New System.Drawing.Size(493, 318)
         Me.pnlSearch.TabIndex = 16
+        '
+        'btnFilter
+        '
+        Me.btnFilter.Location = New System.Drawing.Point(14, 144)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(75, 23)
+        Me.btnFilter.TabIndex = 24
+        Me.btnFilter.Text = "Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(14, 115)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 23
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'Label9
         '
@@ -300,7 +318,7 @@ Partial Class frmShowCats
         'cmbSearchGender
         '
         Me.cmbSearchGender.FormattingEnabled = True
-        Me.cmbSearchGender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.cmbSearchGender.Items.AddRange(New Object() {"Any", "Male", "Female"})
         Me.cmbSearchGender.Location = New System.Drawing.Point(14, 83)
         Me.cmbSearchGender.Name = "cmbSearchGender"
         Me.cmbSearchGender.Size = New System.Drawing.Size(121, 21)
@@ -339,7 +357,7 @@ Partial Class frmShowCats
         Me.grpMenu.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.grpMenu.Controls.Add(Me.radSearch)
         Me.grpMenu.Controls.Add(Me.radEdit)
-        Me.grpMenu.Location = New System.Drawing.Point(31, 573)
+        Me.grpMenu.Location = New System.Drawing.Point(23, 576)
         Me.grpMenu.Name = "grpMenu"
         Me.grpMenu.Size = New System.Drawing.Size(80, 76)
         Me.grpMenu.TabIndex = 18
@@ -360,32 +378,14 @@ Partial Class frmShowCats
         '
         Me.CatBreedBindingSource.DataSource = GetType(Models.CatBreed)
         '
-        'btnSearch
-        '
-        Me.btnSearch.Location = New System.Drawing.Point(14, 115)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch.TabIndex = 23
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'btnFilter
-        '
-        Me.btnFilter.Location = New System.Drawing.Point(14, 144)
-        Me.btnFilter.Name = "btnFilter"
-        Me.btnFilter.Size = New System.Drawing.Size(75, 23)
-        Me.btnFilter.TabIndex = 24
-        Me.btnFilter.Text = "Filter"
-        Me.btnFilter.UseVisualStyleBackColor = True
-        '
         'frmShowCats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1386, 830)
-        Me.Controls.Add(Me.grpMenu)
-        Me.Controls.Add(Me.pnlSearch)
         Me.Controls.Add(Me.pnlEdit)
+        Me.Controls.Add(Me.pnlSearch)
+        Me.Controls.Add(Me.grpMenu)
         Me.Controls.Add(Me.dgvShowCats)
         Me.Controls.Add(Me.btnShowSelected)
         Me.Controls.Add(Me.btnShowEditor)

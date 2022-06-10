@@ -25,3 +25,4 @@ C:\Users\Ken\Source\Repos\CatPickerVB\CatPickerVB\obj\Debug\UI.vbproj.CopyComple
 C:\Users\Ken\Source\Repos\CatPickerVB\CatPickerVB\obj\Debug\CatPickerVB.exe
 C:\Users\Ken\Source\Repos\CatPickerVB\CatPickerVB\obj\Debug\CatPickerVB.xml
 C:\Users\Ken\Source\Repos\CatPickerVB\CatPickerVB\obj\Debug\CatPickerVB.pdb
+C:\Users\Ken\source\repos\CatPickerVB\CatPickerVB\obj\Debug\CatPickerVB.frmShowCatDetail.resources

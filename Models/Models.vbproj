@@ -68,6 +68,7 @@
     <Compile Include="Models\Cat.vb" />
     <Compile Include="Models\CatBreed.vb" />
     <Compile Include="Models\CatDetail.vb" />
+    <Compile Include="Models\CatPersonality.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -83,6 +84,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\CatDetailVM.vb" />
     <Compile Include="ViewModels\CatVM.vb" />
   </ItemGroup>
   <ItemGroup>

@@ -150,7 +150,7 @@ Public Class ODBCRep(Of T)
   End Function
 
   Protected Function getRecordByID(Id As Integer) As T
-    Return Nothing
+    Return getRecords(baseSQLIdString + CStr(Id), Nothing).FirstOrDefault()
   End Function
 
   Protected Function getRecords(strParamList As List(Of SQLParam)) As IEnumerable(Of T)
@@ -162,7 +162,7 @@ Public Class ODBCRep(Of T)
     Dim list = New List(Of T)()
     Dim reader As DataTable = Nothing
 
-    reader = getDataObject("", paramList)
+    reader = getDataObject(sqlStr, paramList)
 
     Try
       If reader.Rows.Count > 0 Then

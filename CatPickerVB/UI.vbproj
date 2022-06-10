@@ -74,10 +74,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CatController.vb" />
+    <Compile Include="Controllers\DetailController.vb" />
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
     <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmShowCatDetail.Designer.vb">
+      <DependentUpon>frmShowCatDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmShowCatDetail.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEditCat.Designer.vb">
@@ -110,11 +117,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewEditCat.vb" />
+    <Compile Include="ViewShowCatDetail.vb" />
     <Compile Include="ViewShowCats.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmShowCatDetail.resx">
+      <DependentUpon>frmShowCatDetail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditCat.resx">
       <DependentUpon>frmEditCat.vb</DependentUpon>

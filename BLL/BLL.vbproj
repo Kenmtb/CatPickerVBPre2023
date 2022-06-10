@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="BLL_MayNotBeNeeded.vb" />
     <Compile Include="CatBLL.vb" />
+    <Compile Include="CatDetailBll.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

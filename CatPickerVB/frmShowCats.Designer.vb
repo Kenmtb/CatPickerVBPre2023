@@ -55,6 +55,7 @@ Partial Class frmShowCats
         Me.txtSearchAge = New System.Windows.Forms.TextBox()
         Me.radEdit = New System.Windows.Forms.RadioButton()
         Me.grpMenu = New System.Windows.Forms.GroupBox()
+        Me.radDetails = New System.Windows.Forms.RadioButton()
         Me.radSearch = New System.Windows.Forms.RadioButton()
         Me.CatBreedBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.dgvShowCats, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,7 +94,7 @@ Partial Class frmShowCats
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(22, 682)
+        Me.Button1.Location = New System.Drawing.Point(23, 711)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(88, 39)
         Me.Button1.TabIndex = 3
@@ -112,7 +113,7 @@ Partial Class frmShowCats
         'btnShowEditor
         '
         Me.btnShowEditor.Enabled = False
-        Me.btnShowEditor.Location = New System.Drawing.Point(22, 722)
+        Me.btnShowEditor.Location = New System.Drawing.Point(23, 751)
         Me.btnShowEditor.Name = "btnShowEditor"
         Me.btnShowEditor.Size = New System.Drawing.Size(88, 40)
         Me.btnShowEditor.TabIndex = 5
@@ -355,18 +356,30 @@ Partial Class frmShowCats
         'grpMenu
         '
         Me.grpMenu.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.grpMenu.Controls.Add(Me.radDetails)
         Me.grpMenu.Controls.Add(Me.radSearch)
         Me.grpMenu.Controls.Add(Me.radEdit)
         Me.grpMenu.Location = New System.Drawing.Point(23, 576)
         Me.grpMenu.Name = "grpMenu"
-        Me.grpMenu.Size = New System.Drawing.Size(80, 76)
+        Me.grpMenu.Size = New System.Drawing.Size(80, 102)
         Me.grpMenu.TabIndex = 18
         Me.grpMenu.TabStop = False
+        '
+        'radDetails
+        '
+        Me.radDetails.AutoSize = True
+        Me.radDetails.Location = New System.Drawing.Point(17, 42)
+        Me.radDetails.Name = "radDetails"
+        Me.radDetails.Size = New System.Drawing.Size(57, 17)
+        Me.radDetails.TabIndex = 19
+        Me.radDetails.TabStop = True
+        Me.radDetails.Text = "Details"
+        Me.radDetails.UseVisualStyleBackColor = True
         '
         'radSearch
         '
         Me.radSearch.AutoSize = True
-        Me.radSearch.Location = New System.Drawing.Point(17, 42)
+        Me.radSearch.Location = New System.Drawing.Point(17, 65)
         Me.radSearch.Name = "radSearch"
         Me.radSearch.Size = New System.Drawing.Size(59, 17)
         Me.radSearch.TabIndex = 18
@@ -439,4 +452,5 @@ Partial Class frmShowCats
     Friend WithEvents CatBreedBindingSource As BindingSource
     Friend WithEvents btnSearch As Button
     Friend WithEvents btnFilter As Button
+    Friend WithEvents radDetails As RadioButton
 End Class

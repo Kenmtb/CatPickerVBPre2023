@@ -6,6 +6,7 @@ Imports CatPickerVB
 Imports System.Windows.Forms
 
 Public Class CatController
+  ' The controller's job is to join a form with it's data source VM
   Dim bll As New CatBLL
   Dim vm As New CatVM
   Dim viewShowCats As ViewShowCats
@@ -23,7 +24,7 @@ Public Class CatController
     viewShowCats.vm = vm
   End Sub
 
-  Public Sub startForm()
+  Public Sub ShowForm()
     'fill the startup VM
     vm = bll.getAll()
 
@@ -57,9 +58,9 @@ Public Class CatController
 
     viewEditCat.frm.initForm(vm)
     viewEditCat.frm.Show()
-
-
   End Sub
+
+
 
 
 End Class

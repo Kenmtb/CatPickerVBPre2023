@@ -7,18 +7,15 @@ Imports Globals.Utilities
 Public Class frmShowCats
   Implements Globals.IFormView(Of CatVM)
   Dim bll As New BLL.CatBLL
+  Dim detailBll As New BLL.CatDetailBll
   Public catList = New List(Of Cat)
   Dim frm As Form1
-  Dim ctrl As CatController
+  Dim catCtrl As CatController
+  Dim detailCtrl As New detailController
   Dim vm As CatVM
   Dim rec As Cat
   Dim recIndex As Integer
   Dim bs As BindingSource
-
-  'move to resource file
-  'dim imageDir As String = "C:\Users\Ken\source\repos\CatPicker\CatPicker\Images\Cats\"
-  'get the form data
-  'Public Property vm As CatVM
 
   Public Sub New()
     ' This call is required by the designer.
@@ -26,29 +23,6 @@ Public Class frmShowCats
     frm = New Form1()
     'ctrl = New CatController
   End Sub
-
-
-  Private Sub bindControls()
-
-  End Sub
-
-  Private Sub setUpForm(vm As CatVM)
-
-  End Sub
-
-
-  'Private Sub ClearAllBindings()
-  '  Dim c As Control
-  '  For Each c In Me.Controls
-  '    c.DataBindings.Clear()
-  '    If c.HasChildren Then
-  '      For Each cc In c.Controls
-  '        cc.DataBindings.Clear()
-  '      Next cc
-  '    End If
-  '  Next c
-
-  'End Sub
 
   Public Sub initForm(vm As CatVM) Implements IFormView(Of CatVM).initForm
     ' Add any initialization after the InitializeComponent() call.
@@ -148,17 +122,20 @@ bypass:
 
   Private Sub dgvShowCats_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvShowCats.RowEnter
 
-
     If e.RowIndex > -1 Then
       recIndex = e.RowIndex
       Dim cells As DataGridViewCellCollection = dgvShowCats.Rows(recIndex).Cells
+
+      'record info
+      rec = catList(recIndex)
+
 
       '  'catDetails(Image.FromFile(imageDir + dgvShowCats.Rows(row).Cells("pic").Value), dgvShowCats.Rows(row).Cells("name").Value)
       '  'Not sure why this is a composite object, my try breaking into a pic box and text box
       'catDetails(Image.FromFile(imageDir + cells("pic").Value), cells("pic").Value)
       picCatPic.Image = Image.FromFile(imageDir + cells("pic").Value)
 
-      'editor controls
+      'update editor controls
       Dim breeds As List(Of CatBreed) = vm.catBreedList
       Dim breedNames = From brd In breeds
                        Where brd.Id = cells("breedId").Value
@@ -166,9 +143,17 @@ bypass:
       cmbBreed.Text = breedNames(0).breedName '"Mixed" 'add a dlookup to get the breedName from the Id
 
 
+      'update details controls
+      'Dim detailRec As CatDetail
+
+      detailCtrl.UpdateForm(rec.detailsId)
+
+
+
       '  txtAge.Text = cells("age").Value
       '  txtGender.Text = cells("gender").Value
       '  txtArrivalDate.Text = cells("arrivalDate").Value
+
 
     End If
   End Sub
@@ -198,21 +183,21 @@ bypass:
 
     Dim vm As New CatVM
     vm.catList = catList
-    ctrl = New CatController
-    ctrl.ShowSelected(vm)
+    catCtrl = New CatController
+    catCtrl.ShowSelected(vm)
   End Sub
 
   Private Sub btnShowEditor_Click(sender As Object, e As EventArgs) Handles btnShowEditor.Click
     Dim vm As New CatVM
     vm.catList = catList
-    ctrl = New CatController
-    ctrl.ShowEditor(vm)
+    catCtrl = New CatController
+    catCtrl.ShowEditor(vm)
   End Sub
 
   Private Sub txtSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
 
-    rec = catList(recIndex)
+    'rec = catList(recIndex)
 
     'Handle unbound controls
     rec.breedId = cmbBreed.SelectedItem.Id
@@ -249,20 +234,32 @@ bypass:
   End Sub
 
   Private Sub radEdit_CheckedChanged(sender As Object, e As EventArgs) Handles radEdit.CheckedChanged
+    hideAllContainers()
     If radEdit.Checked Then
-      pnlSearch.Visible = False
-      'pnlEdit.BringToFront()
       pnlEdit.Visible = True
     End If
   End Sub
 
   Private Sub radSearch_CheckedChanged(sender As Object, e As EventArgs) Handles radSearch.CheckedChanged
-    If radSearch.Checked Then
-      pnlEdit.Visible = False
-      pnlSearch.Visible = True
-      'pnlSearch.BringToFront()
-    End If
+    hideAllContainers()
 
+    If radSearch.Checked Then
+      pnlSearch.Visible = True
+    End If
+  End Sub
+
+  Private Sub radDetails_CheckedChanged(sender As Object, e As EventArgs) Handles radDetails.CheckedChanged
+    hideAllContainers()
+    If radDetails.Checked Then
+      detailCtrl = New detailController()
+      detailCtrl.ShowForm(rec.detailsId)
+    End If
+  End Sub
+
+  Private Sub hideAllContainers()
+    pnlEdit.Visible = False
+    pnlSearch.Visible = False
+    frmShowCatDetail.Hide()
   End Sub
 
   Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -297,4 +294,5 @@ bypass:
   Private Sub grpMenu_Enter(sender As Object, e As EventArgs) Handles grpMenu.Enter
 
   End Sub
+
 End Class

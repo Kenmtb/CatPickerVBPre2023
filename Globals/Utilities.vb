@@ -1,4 +1,6 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Configuration
+Imports System.Data.SqlClient
+Imports System.Windows.Forms
 Imports Globals.Defs
 
 Public NotInheritable Class Utilities
@@ -35,5 +37,25 @@ Public NotInheritable Class Utilities
       End If
     Next c
   End Sub
+
+  Public Shared Function SQLLookup(configFileConnectionStringName As String, sqlstr As String) As DataTable
+
+    'configFileConnectionStringName:  config files <connectionStrings>  name
+
+    'Look for the name in the connection string section
+    Dim settings As ConnectionStringSettings = ConfigurationManager.ConnectionStrings(configFileConnectionStringName)
+
+    Dim dt As New DataTable
+    Using cnn As New SqlConnection(settings.ConnectionString)
+      cnn.Open()
+      Using dad As New SqlDataAdapter(sqlstr, cnn)
+        dad.Fill(dt)
+      End Using
+      cnn.Close()
+    End Using
+
+    Return dt
+
+  End Function
 
 End Class

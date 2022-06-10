@@ -23,7 +23,7 @@ Public Class frmSplash
   Private Sub Splash_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     'controller = New CatController(New frmShowCats)
     controller = New CatController()
-    controller.startForm()
+    controller.ShowForm()
   End Sub
 
 End Class
